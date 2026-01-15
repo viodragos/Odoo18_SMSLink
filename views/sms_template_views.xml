@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree view pentru template-uri -->
+    <record id="view_sms_template_tree" model="ir.ui.view">
+        <field name="name">sms.template.tree</field>
+        <field name="model">sms.template</field>
+        <field name="arch" type="xml">
+            <list string="SMS Templates">
+                <field name="name"/>
+                <field name="template_type"/>
+                <field name="body" invisible="1"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+    
+    <!-- Form view pentru template-uri -->
+    <record id="view_sms_template_form" model="ir.ui.view">
+        <field name="name">sms.template.form</field>
+        <field name="model">sms.template</field>
+        <field name="arch" type="xml">
+            <form string="SMS Template">
+                <header>
+                    <field name="active" widget="boolean_button"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="template_type"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group>
+                        <label for="body" string="Message Template"/>
+                        <field name="body" nolabel="1" widget="textarea" 
+                               placeholder="Enter your SMS template here..."/>
+                    </group>
+                    
+                    <!-- Help pentru variabile -->
+                    <group string="Available Variables" collapsible="true" collapsed="true">
+                        <div class="alert alert-info">
+                            <h4>You can use these variables in your template:</h4>
+                            <table class="table table-sm">
+                                <tr><td><code>{repair_name}</code></td><td>Repair order name</td></tr>
+                                <tr><td><code>{customer_name}</code></td><td>Customer name</td></tr>
+                                <tr><td><code>{product_name}</code></td><td>Product being repaired</td></tr>
+                                <tr><td><code>{repair_time}</code></td><td>Estimated repair time</td></tr>
+                                <tr><td><code>{amount_total}</code></td><td>Total amount</td></tr>
+                                <tr><td><code>{technician}</code></td><td>Technician name</td></tr>
+                                <tr><td><code>{date_start}</code></td><td>Repair start date</td></tr>
+                                <tr><td><code>{date_done}</code></td><td>Repair completion date</td></tr>
+                            </table>
+                            <p><strong>Example:</strong> "Repair #{repair_name} for {customer_name} has started."</p>
+                        </div>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Acțiune pentru template-uri -->
+    <record id="action_sms_template" model="ir.actions.act_window">
+        <field name="name">SMS Templates</field>
+        <field name="res_model">sms.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create SMS templates for automated notifications
+            </p>
+        </field>
+    </record>
+</odoo>

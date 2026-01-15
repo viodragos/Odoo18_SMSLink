@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree view pentru istoric -->
+    <record id="view_sms_history_list" model="ir.ui.view">
+        <field name="name">sms.history.list</field>
+        <field name="model">sms.history</field>
+        <field name="arch" type="xml">
+            <list string="SMS History">
+                <field name="send_date"/>
+                <field name="phone_number"/>
+                <field name="message"/>
+                <field name="status" widget="badge" 
+                    decoration-success="status == 'sent'" 
+                    decoration-danger="status == 'failed'"/>
+                <field name="credit_used"/>
+                <field name="config_id"/>
+                <button name="retry_send" type="object" string="Retry" 
+                    class="btn-secondary" icon="fa-refresh"
+                    invisible="status != 'failed'"/>
+            </list>
+        </field>
+    </record>
+    
+    <!-- Form view pentru istoric -->
+    <record id="view_sms_history_form" model="ir.ui.view">
+        <field name="name">sms.history.form</field>
+        <field name="model">sms.history</field>
+        <field name="arch" type="xml">
+            <form string="SMS Details">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="send_date"/>
+                            <field name="status"/>
+                            <field name="phone_number"/>
+                            <field name="config_id"/>
+                        </group>
+                        <group>
+                            <field name="credit_used"/>
+                            <field name="related_model"/>
+                            <field name="related_record_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Message">
+                            <field name="message" nolabel="true"/>
+                        </page>
+                        <page string="API Response">
+                            <field name="response" nolabel="true"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Acțiune pentru istoric -->
+    <record id="action_sms_history" model="ir.actions.act_window">
+        <field name="name">SMS History</field>
+        <field name="res_model">sms.history</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+    </record>
+</odoo>

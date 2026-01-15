@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Meniuri principale -->
+    <menuitem id="menu_smslink_root" name="SMSLink" sequence="100"/>
+    
+    <menuitem id="menu_smslink_config" name="Configuration" 
+              parent="menu_smslink_root" sequence="10"/>
+    
+    <menuitem id="menu_smslink_config_list" name="SMSLink Config" 
+              parent="menu_smslink_config" action="action_sms_link_config" sequence="10"/>
+    
+    <menuitem id="menu_smslink_history" name="SMS History" 
+              parent="menu_smslink_root" action="action_sms_history" sequence="20"/>
+</odoo>

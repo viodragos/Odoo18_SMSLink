@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sms_link_config,sms.link.config,model_sms_link_config,base.group_user,1,1,1,0
+access_sms_link_config_manager,sms.link.config,model_sms_link_config,base.group_system,1,1,1,1
+access_sms_history,sms.history,model_sms_history,base.group_user,1,0,0,0
+access_sms_history_manager,sms.history,model_sms_history,base.group_system,1,1,1,1

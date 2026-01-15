@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extindere formular repair.order -->
+    <record id="view_repair_order_form_sms_inherit" model="ir.ui.view">
+        <field name="name">repair.order.form.sms</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form"/>
+        <field name="arch" type="xml">
+            
+            <!-- BUTOANE ÎN HEADER -->
+            <xpath expr="//header" position="inside">
+                <button name="action_send_start_sms" type="object" 
+                        string="Send Start SMS" class="btn-primary" 
+                        icon="fa-play-circle" 
+                        attrs="{'invisible': [('state', '!=', 'under_repair')]}"/>
+                
+                <button name="action_send_done_sms" type="object" 
+                        string="Send Done SMS" class="btn-success" 
+                        icon="fa-check-circle"
+                        attrs="{'invisible': [('state', '!=', 'done')]}"/>
+                        
+                <button name="action_view_sms_history" type="object" 
+                        string="SMS History" class="btn-secondary" 
+                        icon="fa-history"/>
+            </xpath>
+            
+            <!-- SECȚIUNE SMS ÎN FORMULAR -->
+            <xpath expr="//sheet" position="inside">
+                <div class="oe_button_box" name="button_box">
+                    <!-- Butoane rapide pentru SMS -->
+                </div>
+            </xpath>
+            
+            <!-- PANOU CONFIGURARE SMS -->
+            <xpath expr="//notebook" position="before">
+                <page string="SMS Notifications">
+                    <group string="SMS Configuration">
+                        <group>
+                            <field name="sms_notifications_enabled"/>
+                            <field name="sms_sent_count" readonly="1"/>
+                            <field name="last_sms_sent" readonly="1"/>
+                            <field name="last_sms_type" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="sms_template_start_id" widget="selection"/>
+                            <field name="sms_template_done_id" widget="selection"/>
+                        </group>
+                    </group>
+                    
+                    <group string="Custom Messages">
+                        <group>
+                            <label for="sms_custom_start" string="Start Repair Message"/>
+                            <field name="sms_custom_start" widget="textarea" nolabel="1" 
+                                   placeholder="Custom message for repair start..."/>
+                        </group>
+                        <group>
+                            <label for="sms_custom_done" string="Completion Message"/>
+                            <field name="sms_custom_done" widget="textarea" nolabel="1" 
+                                   placeholder="Custom message for repair completion..."/>
+                        </group>
+                    </group>
+                    
+                    <!-- VARIABILE DISPONIBILE -->
+                    <group string="Available Variables" collapsible="true" collapsed="true">
+                        <div class="alert alert-info" role="alert">
+                            <p><strong>You can use these variables in custom messages:</strong></p>
+                            <ul>
+                                <li><code>{repair_name}</code> - Repair order name</li>
+                                <li><code>{customer_name}</code> - Customer name</li>
+                                <li><code>{product_name}</code> - Product being repaired</li>
+                                <li><code>{repair_time}</code> - Estimated repair time</li>
+                                <li><code>{amount_total}</code> - Total amount</li>
+                                <li><code>{technician}</code> - Technician name</li>
+                                <li><code>{date_start}</code> - Repair start date</li>
+                                <li><code>{date_done}</code> - Repair completion date</li>
+                            </ul>
+                        </div>
+                    </group>
+                </page>
+            </xpath>
+            
+            <!-- ISTORIC SMS ÎN CHATTER (opțional) -->
+            <xpath expr="//div[hasclass('o_Chatter')]" position="inside">
+                <div class="oe_chatter" attrs="{'invisible': [('sms_sent_count', '=', 0)]}">
+                    <field name="message_ids" position="before">
+                        <div class="alert alert-success o_mms_sms_summary" role="alert">
+                            <h4 class="alert-heading">
+                                <i class="fa fa-comment me-2"></i>SMS Notifications
+                            </h4>
+                            <p>
+                                <strong>Sent:</strong> <span t-esc="sms_sent_count"/> SMS |
+                                <strong>Last:</strong> <span t-esc="last_sms_sent"/> 
+                                (<span t-esc="last_sms_type"/>)
+                            </p>
+                            <button name="action_view_sms_history" type="object" 
+                                    class="btn btn-sm btn-outline-primary">
+                                View SMS History
+                            </button>
+                        </div>
+                    </field>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
