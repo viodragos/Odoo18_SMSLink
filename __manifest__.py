@@ -16,6 +16,8 @@
         'views/sms_config_views.xml',
         'views/sms_history_views.xml',
         'views/repair_simple_views.xml',     # NOU - repair integration
+        'smslink_wizard/contact_sms_wizard_view.xml',
+        'views/sms_compose_contact_view.xml',
         'views/menu.xml',
         # 'data/ir_cron.xml',
     ],

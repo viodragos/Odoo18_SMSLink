@@ -3,3 +3,4 @@ access_sms_link_config,sms.link.config,model_sms_link_config,base.group_user,1,1
 access_sms_link_config_manager,sms.link.config,model_sms_link_config,base.group_system,1,1,1,1
 access_sms_history,sms.history,model_sms_history,base.group_user,1,0,0,0
 access_sms_history_manager,sms.history,model_sms_history,base.group_system,1,1,1,1
+access_contact_sms_wizard,contact.sms.wizard,model_contact_sms_wizard,base.group_user,1,1,1,1
