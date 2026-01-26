@@ -19,6 +19,7 @@
         'smslink_wizard/contact_sms_wizard_view.xml',
         'views/sms_compose_contact_view.xml',
         'views/menu.xml',
+        'views/report_picking_templates.xml',
         # 'data/ir_cron.xml',
     ],
     'installable': True,
